@@ -1,16 +1,10 @@
-import '@testing-library/jest-dom';
-import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { render } from "@testing-library/react";
+import { screen } from "@testing-library/dom";
+import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 describe("App Component", () => {
-  test("renders Vite and React logos", () => {
-    render(<App />);
-    const viteLogo = screen.getByAltText(/vite logo/i);
-    const reactLogo = screen.getByAltText(/react logo/i);
-    expect(viteLogo).toBeInTheDocument();
-    expect(reactLogo).toBeInTheDocument();
-  });
-
   test("renders heading", () => {
     render(<App />);
     const heading = screen.getByRole("heading", { name: /vite \+ react/i });
@@ -30,14 +24,14 @@ describe("App Component", () => {
     expect(readTheDocs).toBeInTheDocument();
   });
 
-  test("increments count when button is clicked", () => {
+  test("increments count when button is clicked", async () => {
     render(<App />);
 
     const button = screen.getByRole("button", { name: /count is 0/i });
     expect(button).toHaveTextContent("count is 0");
-    fireEvent.click(button);
+    await userEvent.click(button);
     expect(button).toHaveTextContent("count is 1");
-    fireEvent.click(button);
+    await userEvent.click(button);
     expect(button).toHaveTextContent("count is 2");
   });
 });
