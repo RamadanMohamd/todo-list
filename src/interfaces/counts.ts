@@ -1,5 +1,5 @@
 export interface Count {
-    uncompleted: number;
-    completed: number;
-    deleted: number;
-  }
+  uncompleted: number;
+  completed: number;
+  deleted: number;
+}

@@ -7,7 +7,11 @@ export function TasksStatus() {
       <Badge aria-label={`Deleted Tasks Count: ${deleted}`} variant="destructive" className="my-4">
         Deleted: <span>{deleted}</span>
       </Badge>
-      <Badge aria-label={`Uncompleted Tasks Count: ${uncompleted}`} variant="secondary" className="my-4">
+      <Badge
+        aria-label={`Uncompleted Tasks Count: ${uncompleted}`}
+        variant="secondary"
+        className="my-4"
+      >
         Uncompleted<span>{uncompleted}</span>
       </Badge>
       <Badge aria-label={`Completed Tasks Count: ${completed}`} variant="default" className="my-4">
