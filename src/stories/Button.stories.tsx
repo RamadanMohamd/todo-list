@@ -29,7 +29,8 @@ const meta: Meta<ButtonProps> = {
   parameters: {
     docs: {
       description: {
-        component: "The `Button` component is used to trigger actions or events. It supports multiple variants and sizes.",
+        component:
+          "The `Button` component is used to trigger actions or events. It supports multiple variants and sizes.",
       },
     },
   },
