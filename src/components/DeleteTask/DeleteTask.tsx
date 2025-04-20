@@ -1,5 +1,4 @@
 import { TrashIcon } from "lucide-react";
-import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -11,14 +10,39 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { Button } from "@/components/ui/Button";
+import { deleteTask } from "@/services/tasks";
+import { useDialogStore } from "@/store/dialogs";
+import { useMutation } from "@tanstack/react-query";
+import { usePrefetchTasks } from "@/hooks/usePrefetchTasks";
+import { usePaginationStore } from "@/store/pagination";
+import { ITask } from "@/interfaces/task";
+import { useTaskStore } from "@/store/task";
 
-export function DeleteTask({ onDelete }: { onDelete: () => void }) {
-  const [open, setOpen] = useState(false);
+export function DeleteTask(props: ITask) {
+  const { isConfirmDialogOpen, openCloseConfirmDialog } = useDialogStore();
+  const { page, limit } = usePaginationStore();
+  const { updateTaskStore, taskToUpdate } = useTaskStore();
+  const { prefetchTasks } = usePrefetchTasks();
+  const { mutate } = useMutation({
+    mutationFn: deleteTask,
+    onSuccess: () => {
+      openCloseConfirmDialog(false);
+      prefetchTasks(page, limit);
+    },
+    onError: (error) => {
+      console.error("Error deleting task:", error);
+    },
+  });
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog open={isConfirmDialogOpen} onOpenChange={openCloseConfirmDialog}>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" className="my-4">
+        <Button
+          onClick={() => updateTaskStore(props)}
+          disabled={props.deleted}
+          variant="destructive"
+          className="my-4"
+        >
           <TrashIcon className="size-4" />
         </Button>
       </AlertDialogTrigger>
@@ -30,14 +54,15 @@ export function DeleteTask({ onDelete }: { onDelete: () => void }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <Button variant="outline" onClick={() => setOpen(false)}>
+          <Button variant="outline" onClick={() => openCloseConfirmDialog(false)}>
             Cancel
           </Button>
           <Button
             variant="destructive"
             onClick={() => {
-              onDelete(); // Call the delete function
-              setOpen(false); // Close the dialog
+              if (!taskToUpdate) return;
+              mutate(taskToUpdate.id);
+              openCloseConfirmDialog(false);
             }}
           >
             Delete

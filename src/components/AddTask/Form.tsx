@@ -12,6 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useDialogStore } from "@/store/dialogs";
 
 interface IText {
   text: string;
@@ -23,7 +24,9 @@ const formSchema = z.object({
   }),
 });
 
-export function AddTaskForm({ setOpen }: { setOpen: (open: boolean) => void }) {
+export function AddTaskForm() {
+  const { openCloseAddDialog } = useDialogStore();
+
   const onSubmit = (data: IText) => {
     console.log(data);
   };
@@ -54,7 +57,7 @@ export function AddTaskForm({ setOpen }: { setOpen: (open: boolean) => void }) {
         </form>
       </Form>
       <DialogFooter>
-        <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+        <Button type="button" variant="outline" onClick={() => openCloseAddDialog(false)}>
           Cancel
         </Button>
         <Button type="submit" form="add-task-form">

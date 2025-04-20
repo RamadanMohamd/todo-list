@@ -1,14 +1,14 @@
-import { useState } from "react";
 import { Dialog, DialogTitle } from "@radix-ui/react-dialog";
-import { Button } from "../ui/Button";
-import { DialogContent, DialogDescription, DialogHeader } from "../ui/dialog";
-import { AddTaskForm } from "./Form";
+import { Button } from "@/components/ui/Button";
+import { DialogContent, DialogDescription, DialogHeader } from "@/components/ui/dialog";
+import { AddTaskForm } from "@/components/AddTask/Form";
+import { useDialogStore } from "@/store/dialogs";
 
 export function AddTask() {
-  const [open, setOpen] = useState(false);
+  const { isAddDialogOpen, openCloseAddDialog } = useDialogStore();
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <Button onClick={() => setOpen(true)}> Add new task </Button>
+    <Dialog open={isAddDialogOpen} onOpenChange={openCloseAddDialog}>
+      <Button onClick={() => openCloseAddDialog(true)}> Add new task </Button>
       <DialogContent className="sm:w-[600px] w-full">
         <DialogHeader>
           <DialogTitle>Add</DialogTitle>
@@ -16,7 +16,7 @@ export function AddTask() {
             Fill out the form below to add a new task to your list.
           </DialogDescription>
         </DialogHeader>
-        <AddTaskForm setOpen={setOpen} />
+        <AddTaskForm />
       </DialogContent>
     </Dialog>
   );

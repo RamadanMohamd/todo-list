@@ -1,26 +1,38 @@
-import {
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationPrevious,
-  PaginationNext,
-} from "@/components/ui/pagination";
+import { PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
+import { usePaginationStore } from "@/store/pagination";
+import { Button } from "../ui/Button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
-interface PaginationProps {
-  currentPage: number;
-}
-
-export const TaskPagination: React.FC<PaginationProps> = ({ currentPage }) => {
+export const TaskPagination: React.FC = () => {
+  const { page, limit, updatePage, tasksLength } = usePaginationStore();
   return (
     <PaginationContent>
       <PaginationItem>
-        <PaginationPrevious href="#" disabled />
+        <Button
+          disabled={page === 1}
+          variant="outline"
+          onClick={() => {
+            updatePage(page - 1);
+          }}
+        >
+          <ArrowLeft className="mr-2" />
+          Previous
+        </Button>
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#">{currentPage}</PaginationLink>
+        <PaginationLink href="#">{page}</PaginationLink>
       </PaginationItem>
       <PaginationItem>
-        <PaginationNext href="#" disabled={false} />
+        <Button
+          variant="outline"
+          disabled={tasksLength < limit || tasksLength === 0}
+          onClick={() => {
+            updatePage(page + 1);
+          }}
+        >
+          Next
+          <ArrowRight className="ml-2" />
+        </Button>
       </PaginationItem>
     </PaginationContent>
   );
