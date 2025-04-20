@@ -13,8 +13,7 @@ import { useTaskStore } from "@/store/task";
 
 export function AddTask() {
   const { isAddDialogOpen, openCloseAddDialog } = useDialogStore();
-    const { updateTaskStore } = useTaskStore();
-  
+  const { updateTaskStore } = useTaskStore();
 
   const handleAddTaskClick = () => {
     updateTaskStore(null);

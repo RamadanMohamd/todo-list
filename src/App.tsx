@@ -3,7 +3,7 @@ import { TasksList } from "@/components/TasksList";
 import { TaskPagination } from "@/components/TaskPagination";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SuccessAlert } from "@/components/Alert"
+import { SuccessAlert } from "@/components/Alert";
 import { ErrorBoundary } from "@/ErrorBoundary";
 import { useAlertStore } from "@/store/alert";
 

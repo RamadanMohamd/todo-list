@@ -5,7 +5,7 @@ export async function getTasksCount(): Promise<ITaskCount> {
   try {
     const response = await apiClient.get<ITaskCount>("/counts");
     return response.data;
-  } catch (error) {
+  } catch {
     throw new Error("Error fetching task count");
   }
 }
@@ -19,7 +19,7 @@ export async function getTasks(_page: number, _limit: number): Promise<ITask[]> 
       },
     });
     return response.data;
-  } catch (error) {
+  } catch {
     throw new Error("Error fetching tasks");
   }
 }
@@ -28,7 +28,7 @@ export async function addTask(task: IAddTask): Promise<ITask> {
   try {
     const response = await apiClient.post<ITask>("/tasks", task);
     return response.data;
-  } catch (error) {
+  } catch {
     throw new Error("Error adding task");
   }
 }
@@ -37,7 +37,7 @@ export async function updateTask(task: ITask): Promise<ITask> {
   try {
     const response = await apiClient.put<ITask>(`/tasks/${task.id}`, task);
     return response.data;
-  } catch (error) {
+  } catch {
     throw new Error("Error updating task");
   }
 }
@@ -45,7 +45,7 @@ export async function updateTask(task: ITask): Promise<ITask> {
 export async function deleteTask(id: number): Promise<void> {
   try {
     await apiClient.delete(`/tasks/${id}`);
-  } catch (error) {
+  } catch {
     throw new Error("Error deleting task");
   }
 }
@@ -59,7 +59,7 @@ export async function completeTask({
 }): Promise<void> {
   try {
     await apiClient.patch(`/tasks/${id}`, { completed: isCompleted });
-  } catch (error) {
+  } catch {
     throw new Error("Error completing task");
   }
 }

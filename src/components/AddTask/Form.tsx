@@ -17,7 +17,7 @@ import { useTaskStore } from "@/store/task";
 import { usePrefetchTasks } from "@/hooks/usePrefetchTasks";
 import { useMutation } from "@tanstack/react-query";
 import { addTask, updateTask } from "@/services/tasks";
-import { useAlertStore } from "@/store/alert"
+import { useAlertStore } from "@/store/alert";
 interface IText {
   text: string;
 }
@@ -85,7 +85,6 @@ export function AddTaskForm() {
     openCloseAddDialog(false);
   };
 
-  
   return (
     <div className="space-y-8">
       <Form {...form}>
