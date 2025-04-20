@@ -24,3 +24,12 @@ export async function deleteTask(id: number): Promise<void> {
     throw error;
   }
 }
+
+export async function completeTask(id: number): Promise<void> {
+  try {
+    await apiClient.patch(`/tasks/${id}`, { completed: true });
+  } catch (error) {
+    console.error("Error completing task:", error);
+    throw error;
+  }
+}

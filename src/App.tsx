@@ -13,7 +13,6 @@ function App() {
         <Card className="sm:w-[600px] w-full">
           <CardHeader className="w-full flex items-center justify-between">
             <CardTitle>Tasks</CardTitle>
-            <AddTask />
           </CardHeader>
           <CardContent>
             <TasksList />
