@@ -1,22 +1,38 @@
 import { Badge } from "@/components/ui/Badge";
+import { ITaskCount } from "@/interfaces/task";
+import { getTasksCount } from "@/services/tasks";
+import { useQuery } from "@tanstack/react-query";
 
 export function TasksStatus() {
-  const [uncompleted, completed, deleted]: number[] = [10, 20, 30];
+  const { data: count } = useQuery<ITaskCount>({
+    queryKey: ["count"],
+    queryFn: getTasksCount,
+    initialData: { uncompleted: 0, completed: 0, deleted: 0 },
+  });
+
   return (
     <section className="flex gap-3">
-      <Badge aria-label={`Deleted Tasks Count: ${deleted}`} variant="destructive" className="my-4">
-        <span className="sm:inline hidden">Deleted:</span> <span>{deleted}</span>
+      <Badge
+        aria-label={`Deleted Tasks Count: ${count.deleted}`}
+        variant="destructive"
+        className="my-4"
+      >
+        <span className="sm:inline hidden">Deleted:</span> <span>{count.deleted}</span>
       </Badge>
       <Badge
-        aria-label={`Uncompleted Tasks Count: ${uncompleted}`}
+        aria-label={`Uncompleted Tasks Count: ${count.uncompleted}`}
         variant="secondary"
         className="my-4"
       >
         <span className="sm:inline hidden">Uncompleted:</span>
-        <span>{uncompleted}</span>
+        <span>{count.uncompleted}</span>
       </Badge>
-      <Badge aria-label={`Completed Tasks Count: ${completed}`} variant="default" className="my-4">
-        <span className="sm:inline hidden">Completed:</span> <span>{completed}</span>
+      <Badge
+        aria-label={`Completed Tasks Count: ${count.completed}`}
+        variant="default"
+        className="my-4"
+      >
+        <span className="sm:inline hidden">Completed:</span> <span>{count.completed}</span>
       </Badge>
     </section>
   );

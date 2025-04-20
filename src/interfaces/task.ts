@@ -6,10 +6,17 @@ export interface ITask {
   createdAt: string;
 }
 
+export type IAddTask = Omit<ITask, "id">;
 export interface ITasksResponse {
   tasks: ITask[];
 }
 
 export interface ITaskPayload {
   description: string;
+}
+
+export interface ITaskCount {
+  uncompleted: number;
+  completed: number;
+  deleted: number;
 }

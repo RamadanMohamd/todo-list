@@ -35,7 +35,7 @@ export function TasksList() {
   }
 
   if (isError) {
-    return <div>Failed to load tasks. Please try again later.</div>;
+    throw new Error("Failed to load tasks");
   }
 
   return (

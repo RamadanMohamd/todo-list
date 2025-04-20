@@ -1,5 +1,14 @@
 import apiClient from "@/services/client";
-import { ITask } from "@/interfaces/task";
+import { IAddTask, ITask, ITaskCount } from "@/interfaces/task";
+
+export async function getTasksCount(): Promise<ITaskCount> {
+  try {
+    const response = await apiClient.get<ITaskCount>("/counts");
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching task count");
+  }
+}
 
 export async function getTasks(_page: number, _limit: number): Promise<ITask[]> {
   try {
@@ -11,8 +20,25 @@ export async function getTasks(_page: number, _limit: number): Promise<ITask[]> 
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching tasks:", error);
-    throw error;
+    throw new Error("Error fetching tasks");
+  }
+}
+
+export async function addTask(task: IAddTask): Promise<ITask> {
+  try {
+    const response = await apiClient.post<ITask>("/tasks", task);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error adding task");
+  }
+}
+
+export async function updateTask(task: ITask): Promise<ITask> {
+  try {
+    const response = await apiClient.put<ITask>(`/tasks/${task.id}`, task);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error updating task");
   }
 }
 
@@ -20,8 +46,7 @@ export async function deleteTask(id: number): Promise<void> {
   try {
     await apiClient.delete(`/tasks/${id}`);
   } catch (error) {
-    console.error("Error deleting task:", error);
-    throw error;
+    throw new Error("Error deleting task");
   }
 }
 
@@ -35,7 +60,6 @@ export async function completeTask({
   try {
     await apiClient.patch(`/tasks/${id}`, { completed: isCompleted });
   } catch (error) {
-    console.error("Error completing task:", error);
-    throw error;
+    throw new Error("Error completing task");
   }
 }

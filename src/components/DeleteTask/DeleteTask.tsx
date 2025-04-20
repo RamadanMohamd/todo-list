@@ -16,14 +16,17 @@ import { useMutation } from "@tanstack/react-query";
 import { usePrefetchTasks } from "@/hooks/usePrefetchTasks";
 import { ITask } from "@/interfaces/task";
 import { useTaskStore } from "@/store/task";
+import { useAlertStore } from "@/store/alert";
 
 export function DeleteTask(props: ITask) {
+  const { showAlert } = useAlertStore();
   const { isConfirmDialogOpen, openCloseConfirmDialog } = useDialogStore();
   const { updateTaskStore, taskToUpdate } = useTaskStore();
   const { prefetchTasks } = usePrefetchTasks();
   const { mutate } = useMutation({
     mutationFn: deleteTask,
     onSuccess: () => {
+      showAlert("Task deleted successfully");
       openCloseConfirmDialog(false);
       prefetchTasks();
     },
