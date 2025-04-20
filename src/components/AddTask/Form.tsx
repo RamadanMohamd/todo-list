@@ -57,7 +57,9 @@ export function AddTaskForm({ setOpen }: { setOpen: (open: boolean) => void }) {
         <Button type="button" variant="outline" onClick={() => setOpen(false)}>
           Cancel
         </Button>
-        <Button type="submit" form="add-task-form">Add Task</Button>
+        <Button type="submit" form="add-task-form">
+          Add Task
+        </Button>
       </DialogFooter>
     </>
   );
