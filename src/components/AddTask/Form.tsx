@@ -11,8 +11,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { useDialogStore } from "@/store/dialogs";
+import { useTaskStore } from "@/store/task";
 
 interface IText {
   text: string;
@@ -25,15 +26,17 @@ const formSchema = z.object({
 });
 
 export function AddTaskForm() {
+  const { taskToUpdate } = useTaskStore();
   const { openCloseAddDialog } = useDialogStore();
 
   const onSubmit = (data: IText) => {
     console.log(data);
   };
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      text: "",
+      text: taskToUpdate?.text || "",
     },
   });
 
@@ -46,9 +49,9 @@ export function AddTaskForm() {
             name="text"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Text</FormLabel>
+                <FormLabel>Task Text</FormLabel>
                 <FormControl>
-                  <Input placeholder="type ..." {...field} />
+                  <Textarea placeholder="type ..." className="resize-none" {...field} />{" "}
                 </FormControl>
                 <FormMessage />
               </FormItem>

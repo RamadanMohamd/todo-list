@@ -25,9 +25,15 @@ export async function deleteTask(id: number): Promise<void> {
   }
 }
 
-export async function completeTask(id: number): Promise<void> {
+export async function completeTask({
+  id,
+  isCompleted,
+}: {
+  id: number;
+  isCompleted: boolean;
+}): Promise<void> {
   try {
-    await apiClient.patch(`/tasks/${id}`, { completed: true });
+    await apiClient.patch(`/tasks/${id}`, { completed: isCompleted });
   } catch (error) {
     console.error("Error completing task:", error);
     throw error;

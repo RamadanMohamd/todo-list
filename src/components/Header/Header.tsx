@@ -3,7 +3,7 @@ import { AddTask } from "@/components/AddTask";
 
 /**
  * Header component for the application.
- * It contains the title, task status.
+ * It contains the title, task status and AddTask.
  *
  * @returns {JSX.Element} The rendered header component.
  */

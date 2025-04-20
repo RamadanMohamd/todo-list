@@ -14,20 +14,18 @@ import { deleteTask } from "@/services/tasks";
 import { useDialogStore } from "@/store/dialogs";
 import { useMutation } from "@tanstack/react-query";
 import { usePrefetchTasks } from "@/hooks/usePrefetchTasks";
-import { usePaginationStore } from "@/store/pagination";
 import { ITask } from "@/interfaces/task";
 import { useTaskStore } from "@/store/task";
 
 export function DeleteTask(props: ITask) {
   const { isConfirmDialogOpen, openCloseConfirmDialog } = useDialogStore();
-  const { page, limit } = usePaginationStore();
   const { updateTaskStore, taskToUpdate } = useTaskStore();
   const { prefetchTasks } = usePrefetchTasks();
   const { mutate } = useMutation({
     mutationFn: deleteTask,
     onSuccess: () => {
       openCloseConfirmDialog(false);
-      prefetchTasks(page, limit);
+      prefetchTasks();
     },
     onError: (error) => {
       console.error("Error deleting task:", error);

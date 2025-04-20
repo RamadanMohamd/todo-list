@@ -2,7 +2,6 @@ import { MainLayout } from "@/layouts/Main";
 import { TasksList } from "@/components/TasksList";
 import { TaskPagination } from "@/components/TaskPagination";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { AddTask } from "@/components/AddTask";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
