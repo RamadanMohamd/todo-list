@@ -118,3 +118,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+:root {
+  --header-bg: #f9fafb;
+  --header-text: #1f2937;
+}
+
+[data-theme="light"] {
+  --header-bg: #f9fafb;
+  --header-text: #1f2937;
+}
+
+[data-theme="dark"] {
+  --header-bg: #1f2937;
+  --header-text: #ffffff;
+}

@@ -4,7 +4,9 @@ import { type VariantProps } from "class-variance-authority";
 import { badgeVariants } from "./badgeVariant";
 import { cn } from "@/lib/utils";
 
-interface BadgeProps extends React.ComponentProps<"span">, VariantProps<typeof badgeVariants> {
+export interface BadgeProps
+  extends React.ComponentProps<"span">,
+    VariantProps<typeof badgeVariants> {
   asChild?: boolean;
   "aria-label"?: string;
 }
