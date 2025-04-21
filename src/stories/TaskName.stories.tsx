@@ -11,8 +11,7 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component:
-          "The `TaskName` component represents a text for task",
+        component: "The `TaskName` component represents a text for task",
       },
     },
   },

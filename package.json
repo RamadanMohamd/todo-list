@@ -10,6 +10,7 @@
     "lint:fix": "prettier --write . && eslint . --fix",
     "preview": "vite preview",
     "test": "jest",
+    "test:watch": "jest --watch --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

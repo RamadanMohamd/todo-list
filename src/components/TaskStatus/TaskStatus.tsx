@@ -13,6 +13,7 @@ export function TasksStatus() {
   return (
     <section className="flex gap-3">
       <Badge
+        data-testid="badge"
         aria-label={`Deleted Tasks Count: ${count.deleted}`}
         variant="destructive"
         className="my-4"
@@ -20,6 +21,7 @@ export function TasksStatus() {
         <span className="sm:inline hidden">Deleted:</span> <span>{count.deleted}</span>
       </Badge>
       <Badge
+        data-testid="badge"
         aria-label={`Uncompleted Tasks Count: ${count.uncompleted}`}
         variant="secondary"
         className="my-4"
@@ -28,6 +30,7 @@ export function TasksStatus() {
         <span>{count.uncompleted}</span>
       </Badge>
       <Badge
+        data-testid="badge"
         aria-label={`Completed Tasks Count: ${count.completed}`}
         variant="default"
         className="my-4"

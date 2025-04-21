@@ -25,22 +25,25 @@ export function DeleteTask(props: ITask) {
   const { prefetchTasks } = usePrefetchTasks();
   const { mutate } = useMutation({
     mutationFn: deleteTask,
-    onSuccess: () => {
+    onSuccess: async () => {
       showAlert("Task deleted successfully");
+      await prefetchTasks();
       openCloseConfirmDialog(false);
-      prefetchTasks();
     },
     onError: (error) => {
       console.error("Error deleting task:", error);
     },
   });
 
+  const isDeleted = props.deleted;
+
   return (
     <AlertDialog open={isConfirmDialogOpen} onOpenChange={openCloseConfirmDialog}>
       <AlertDialogTrigger asChild>
         <Button
+          data-testid={`delete-${props.id}`}
           onClick={() => updateTaskStore(props)}
-          disabled={props.deleted}
+          disabled={isDeleted}
           variant="destructive"
           className="my-4"
         >
